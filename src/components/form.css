@@ -1,0 +1,84 @@
+.box1 {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    width: 550px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 80px;
+}
+
+.listitem1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 10px 0;
+    list-style: none;
+    width: 100%;
+}
+
+.listitem {
+    flex-grow: 1;
+    margin-left: 10px;
+    font-size: 16px;
+    color: #333;
+    padding: 5px;
+}
+
+#footer1 {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#footer1 button {
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+#footer1 button:hover {
+    color: #000000;
+}
+
+#input {
+    width: 80%;
+    padding: 15px 5px;
+    font-size: 16px;
+    color: #333;
+    border: none;
+
+}
+
+#input:focus {
+    outline: none;
+    border: none;
+}
+
+.select-all {
+    margin-right: 10px;
+}
+
+#all {
+    padding-left: 100px;
+}
+
+#remove-selected {
+    padding-left: 90px;
+}
+
+#count {
+    padding-left: 10px;
+}
+
+.remove-this {
+    border: none;
+    background-color: #ffffff;
+    opacity: 0.3;
+    font-size: large;
+    padding-left: 10px;
+    padding-right: 10px;
+}
