@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./form.css";
 
-// Define the type for a todo item
 interface TodoItem {
   id: number;
   value: string;
@@ -105,3 +104,4 @@ const Form: React.FC = () => {
 };
 
 export default Form;
+
