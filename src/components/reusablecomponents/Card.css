@@ -1,0 +1,46 @@
+.opteamix-listitem1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 10px 0;
+    list-style: none;
+    width: 100%;
+}
+
+
+.opteamix-listitem {
+    flex-grow: 1;
+    font-size: 16px;
+    color: #222;
+    padding-left: 4px;
+    ;
+}
+
+.opteamix-strikethrough {
+    text-decoration: line-through;
+    color: #888;
+}
+
+
+.opteamix-item-checkbox {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+
+.opteamix-remove-this {
+    border: none;
+    background-color: transparent;
+    opacity: 0.6;
+    font-size: large;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.opteamix-remove-this:hover {
+    opacity: 1;
+    color: rgb(7, 7, 7);
+}

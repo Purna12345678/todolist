@@ -53,11 +53,11 @@ const Form: React.FC = () => {
   };
 
   return (
-    <div className="box1">
+    <div className="opteamix-box1">
      
       <div>
         <input
-          className="select-all"
+          className="opteamix-select-all"
           type="checkbox"
           onChange={toggleSelectAll}
           checked={list.length > 0 && list.every((item) => item.selected)}

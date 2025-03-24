@@ -11,7 +11,7 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({ value, onChange, onKeyDown, placeholder }) => {
   return (
     <input
-      className="input"
+      className="opteamix-input"
       type="text"
       value={value}
       onChange={onChange}
