@@ -1,4 +1,5 @@
 import React from "react";
+import "./Card.css"
 
 interface CardProps {
   item: { id: number; value: string; selected: boolean };
@@ -8,18 +9,19 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ item, toggleSelection, removeItem }) => {
   return (
-    <div className="listitem1">
+    <div className="opteamix-listitem1">
       <input
         type="checkbox"
-        className="item-checkbox"
+        className="opteamix-item-checkbox"
         checked={item.selected}
         onChange={() => toggleSelection(item.id)}
       />
-      <li className={`listitem ${item.selected ? "strikethrough" : ""}`}>
+      <li className={`opteamix-listitem ${item.selected ? "opteamix-strikethrough" : ""}`}>
         {item.value}
       </li>
+
       {item.selected && (
-        <button className="remove-this" onClick={() => removeItem(item.id)}>
+        <button className="opteamix-remove-this" onClick={() => removeItem(item.id)}>
           x
         </button>
       )}

@@ -16,7 +16,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:css": "postcss src/**/*.css --replace",
+    "build:html": "posthtml src/**/*.tsx -o src/tsx/tsx",
+    "watch:css": "postcss src/**/*.css --watch --dir src/css/css",
+    "watch:html": "posthtml src/**/*.html -o dist --watch",
+    "process:tsx": "node posthtml.config.js",
+    "build:all": "concurrently \"npm run build:css\" \"npm run process:tsx\""
   },
   "eslintConfig": {
     "extends": [
@@ -38,11 +44,21 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/react": "^19.0.12",
+    "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "concurrently": "^9.1.2",
+    "cssnano": "^7.0.6",
+    "fs-extra": "^11.3.0",
     "mini-css-extract-plugin": "^2.9.2",
+    "postcss": "^8.5.3",
+    "postcss-class-prefix": "^0.3.0",
+    "postcss-cli": "^11.0.1",
     "postcss-loader": "^8.1.1",
     "postcss-prefix-selector": "^2.1.0",
+    "posthtml": "^0.16.6",
+    "posthtml-cli": "^0.10.0",
+    "posthtml-parser": "^0.12.1",
+    "posthtml-render": "^3.0.0",
     "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1"
   },
