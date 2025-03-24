@@ -3,7 +3,9 @@ module.exports = {
     require("postcss-prefix-selector")({
       prefix: ".opteamix",
       transform: (prefix, selector, prefixedSelector) => {
-        if (selector.startsWith("body")) return selector;
+        if (selector.startsWith("#") || selector.startsWith("body")) {
+          return selector;
+        }
         return prefixedSelector.replace(/\s+/g, "");
       },
     }),
