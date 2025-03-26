@@ -1,30 +1,29 @@
 import React from "react";
-import "./Card.css"
+import "./Card.css"; 
 
 interface CardProps {
-  item: { id: number; value: string; selected: boolean };
+  item: { id: number; title: string; compleated: boolean };
   toggleSelection: (id: number) => void;
   removeItem: (id: number) => void;
+  highlight?: boolean; 
 }
 
-const Card: React.FC<CardProps> = ({ item, toggleSelection, removeItem }) => {
+const Card: React.FC<CardProps> = ({
+  item,
+  toggleSelection,
+  removeItem,
+  highlight = false,
+}) => {
   return (
-    <div className= "listitem1">
+    <div className="listitem1">
       <input
         type="checkbox"
         className= "item-checkbox"
-        checked={item.selected}
+        checked={item.compleated}
         onChange={() => toggleSelection(item.id)}
       />
-      <li className={`listitem ${item.selected ? "strikethrough" : ""}`}>
-        {item.value}
-      </li>
-
-      {item.selected && (
-        <button className= "remove-this" onClick={() => removeItem(item.id)}>
-          x
-        </button>
-      )}
+      <span className={`listitem ${item.compleated ? "strikethrough" : ""}`}>{item.title}</span>
+      <button className= "remove-this" onClick={() => removeItem(item.id)}>X</button>
     </div>
   );
 };
