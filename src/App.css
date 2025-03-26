@@ -1,19 +1,19 @@
-.opteamix-App {
+.App {
   text-align: center;
 }
 
-.opteamix-App-logo {
+.App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .opteamix-App-logo {
+  .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
-.opteamix-App-header {
+.App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -24,7 +24,7 @@
   color: white;
 }
 
-.opteamix-App-link {
+.App-link {
   color: #61dafb;
 }
 

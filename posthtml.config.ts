@@ -1,7 +1,7 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 
-const inputDir = "src";
+const inputDir = "build";
 const prefix = "opteamix-";
 
 const processFile = (filePath: string): void => {
@@ -11,14 +11,15 @@ const processFile = (filePath: string): void => {
       return;
     }
 
+    // Handle both JSX and transformed JS cases
     const updatedData = data.replace(
-      /className="([^"]+)"/g,
-      (match: string, classList: string) => {
+      /(className[:=])\s*"([^"]+)"/g, // Match both className="..." and className: "..."
+      (match: string, key: string, classList: string) => {
         const prefixedClasses = classList
           .split(" ")
           .map((cls: string) => (cls.startsWith(prefix) ? cls : `${prefix}${cls}`))
           .join(" ");
-        return `className="${prefixedClasses}"`;
+        return `${key} "${prefixedClasses}"`;
       }
     );
 
@@ -50,7 +51,7 @@ const processDirectory = (dir: string): void => {
 
         if (stats.isDirectory()) {
           processDirectory(filePath);
-        } else if (stats.isFile() && file.endsWith(".tsx")) {
+        } else if (stats.isFile() && (file.endsWith(".js") || file.endsWith(".jsx") || file.endsWith(".tsx"))) {
           processFile(filePath);
         }
       });
