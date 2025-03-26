@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:css": "postcss src/**/*.css --replace",
+    "build:css": "postcss build/**/*.css --replace",
     "build:html": "posthtml src/**/*.tsx -o src/tsx/tsx",
     "watch:css": "postcss src/**/*.css --watch --dir src/css/css",
     "watch:html": "posthtml src/**/*.html -o dist --watch",

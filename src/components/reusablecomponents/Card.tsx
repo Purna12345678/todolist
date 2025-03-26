@@ -9,19 +9,19 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ item, toggleSelection, removeItem }) => {
   return (
-    <div className="opteamix-listitem1">
+    <div className= "listitem1">
       <input
         type="checkbox"
-        className="opteamix-item-checkbox"
+        className= "item-checkbox"
         checked={item.selected}
         onChange={() => toggleSelection(item.id)}
       />
-      <li className={`opteamix-listitem ${item.selected ? "opteamix-strikethrough" : ""}`}>
+      <li className={`listitem ${item.selected ? "strikethrough" : ""}`}>
         {item.value}
       </li>
 
       {item.selected && (
-        <button className="opteamix-remove-this" onClick={() => removeItem(item.id)}>
+        <button className= "remove-this" onClick={() => removeItem(item.id)}>
           x
         </button>
       )}
