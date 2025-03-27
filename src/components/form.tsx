@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { addApiImp } from "../services/todoService";
 import "./form.css";
 import Input from "../components/reusablecomponents/Input";
 import Button from "../components/reusablecomponents/Button";
@@ -15,10 +16,25 @@ const getStoredList = (): TodoItem[] => {
   return storedList ? JSON.parse(storedList) : [];
 };
 
+
 const Form: React.FC = () => {
   const [list, setList] = useState<TodoItem[]>(getStoredList);
-  const [inputValue, setInputValue] = useState<string>("");
-  const [searchQuery, setSearchQuery] = useState<string>("");
+const [inputValue, setInputValue] = useState<string>("");
+const [searchQuery, setSearchQuery] = useState<string>("");
+
+
+const addApi = async () => {
+  try {
+    const newList = await addApiImp();
+
+    setList((prevList) => [...prevList, ...newList]);
+    localStorage.setItem("todoList", JSON.stringify([...list, ...newList])); 
+  } catch (error) {
+    console.error("Error fetching API data:", error);
+  }
+};
+
+
 
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(list));
@@ -98,6 +114,7 @@ const Form: React.FC = () => {
           value={searchQuery}
           onChange={handleSearchChange}
         />
+        <Button text="Add API" onClick={addApi} />
       </div>
 
 
