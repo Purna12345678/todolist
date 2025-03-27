@@ -11,9 +11,9 @@ const processFile = (filePath: string): void => {
       return;
     }
 
-    // Handle both JSX and transformed JS cases
+  
     const updatedData = data.replace(
-      /(className[:=])\s*"([^"]+)"/g, // Match both className="..." and className: "..."
+      /(className[:=])\s*"([^"]+)"/g, 
       (match: string, key: string, classList: string) => {
         const prefixedClasses = classList
           .split(" ")
