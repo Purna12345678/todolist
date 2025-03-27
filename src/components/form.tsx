@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { addApiImp } from "../services/todoService";
 import "./form.css";
 import Input from "../components/reusablecomponents/Input";
 import Button from "../components/reusablecomponents/Button";
@@ -25,13 +25,7 @@ const [searchQuery, setSearchQuery] = useState<string>("");
 
 const addApi = async () => {
   try {
-    const response = await axios.get<TodoItem[]>("https://jsonplaceholder.typicode.com/todos");
-
-    const newList = response.data.slice(0, 10).map((item) => ({
-      id: item.id,
-      title: item.title,
-      compleated: item.compleated,
-    }));
+    const newList = await addApiImp();
 
     setList((prevList) => [...prevList, ...newList]);
     localStorage.setItem("todoList", JSON.stringify([...list, ...newList])); 
