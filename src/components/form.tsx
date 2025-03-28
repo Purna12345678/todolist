@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { addApiImp } from "../services/todoService";
+import { deleteItem, getItems, postItem, updateItem } from "../services/todoService";
 import "./form.css";
 import Input from "../components/reusablecomponents/Input";
 import Button from "../components/reusablecomponents/Button";
@@ -25,7 +25,7 @@ const [searchQuery, setSearchQuery] = useState<string>("");
 
 const addApi = async () => {
   try {
-    const newList = await addApiImp();
+    const newList = await getItems();
 
     setList((prevList) => [...prevList, ...newList]);
     localStorage.setItem("todoList", JSON.stringify([...list, ...newList])); 
@@ -33,7 +33,6 @@ const addApi = async () => {
     console.error("Error fetching API data:", error);
   }
 };
-
 
 
   useEffect(() => {
@@ -46,10 +45,12 @@ const addApi = async () => {
 
   const AddToList = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && inputValue.trim() !== "") {
+      const listItem: TodoItem = { id: 201 + list.length, title: inputValue.trim(), compleated: false }
       const newList = [
         ...list,
-        { id: 201 + list.length, title: inputValue.trim(), compleated: false },
+        listItem,
       ];
+      postItem(listItem)
       setList(newList);
       setInputValue("");
       setSearchQuery("");
@@ -76,6 +77,8 @@ const addApi = async () => {
 
   const removeSelectedItems = () => {
     const updatedList = list.filter((item) => !item.compleated);
+    const selectedItems = list.filter((item) => item.compleated);
+    selectedItems.forEach((item) => deleteItem(item.id));
     setList(updatedList);
   };
 
@@ -86,9 +89,19 @@ const addApi = async () => {
   };
 
   const removeItem = (id: number) => {
-    const updatedList = list.filter((item) => item.id !== id);
+    const updatedList = list.filter((item) => item.id !== id );
+    deleteItem(id);
     setList(updatedList);
   };
+
+  const editItem = (id: number, title: string) => {
+    updateItem(id, { title });
+    const updatedList = list.map((item) =>
+      item.id === id ? { ...item, title } : item
+    );
+    setList(updatedList);
+  };
+  
 
   return (
     <div className="box1">
@@ -125,6 +138,7 @@ const addApi = async () => {
             item={item}
             toggleSelection={toggleSelection}
             removeItem={removeItem}
+            editItem={editItem}
             highlight={searchQuery.trim() !== ""}
           />
         ))}
