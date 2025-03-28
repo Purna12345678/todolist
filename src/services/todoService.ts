@@ -7,7 +7,7 @@ interface TodoItem {
   }
   
 
-export const addApiImp = async () => {
+export const getItems = async () => {
   
     const response = await axios.get<TodoItem[]>("https://jsonplaceholder.typicode.com/todos");
 
@@ -18,3 +18,26 @@ export const addApiImp = async () => {
     }));
     return (newList);
 };  
+
+export const postItem = async (newItem: TodoItem) => {
+    const response = await axios.post<TodoItem>("https://jsonplaceholder.typicode.com/todos", newItem);
+    return response.data;
+  }
+
+export const deleteItem = async (id: number) => {
+    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
+  };
+export  const updateItem = async (id: number, data: { title: string }) => {
+  try {
+    const response = await axios.patch(
+      `https://jsonplaceholder.typicode.com/todos/${id}`,
+      data
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Update failed:", error);
+    throw error;
+  }
+};
+
+  
