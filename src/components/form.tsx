@@ -131,7 +131,7 @@ const addApi = async () => {
           value={searchQuery}
           onChange={handleSearchChange}
         />
-        <Button text="Add API" onClick={addApi} />
+       <button className="button" onClick={addApi}>Add API</button>
       </div>
 
 

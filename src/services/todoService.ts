@@ -6,7 +6,9 @@ interface TodoItem {
     compleated: boolean;
 }
 
+
 const apiUrl = process.env.REACT_APP_API_URL; 
+
 
 if (!apiUrl) {throw new Error("REACT_APP_API_URL does not exist")}
 
