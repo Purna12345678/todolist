@@ -2,6 +2,13 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
+  resolve: {
+    fallback: {
+      "path": require.resolve("path-browserify"),
+      "os": require.resolve("os-browserify/browser"),
+      "crypto": require.resolve("crypto-browserify"),
+    },
+  },
   entry: "./src/index.js",
   output: {
     filename: "bundle.js",
@@ -20,8 +27,8 @@ module.exports = {
               postcssOptions: {
                 plugins: [
                   require("postcss-prefix-selector")({
-                    prefix: ".myprefix",
-                    transform: (prefix, selector, prefixedSelector) => {
+                    prefix: ".opteamix",
+                    transform: (prefix: string, selector: string, prefixedSelector: string) => {
                       if (selector.startsWith("body")) return selector;
                       return prefixedSelector;
                     },
