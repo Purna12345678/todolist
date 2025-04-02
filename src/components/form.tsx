@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { deleteItem, getItems, postItem, updateItem } from "../services/todoService";
 import "./form.css";
-import Input from "../components/reusablecomponents/Input";
-import Button from "../components/reusablecomponents/Button";
-import Card from "../components/reusablecomponents/Card";
+import Input from "./Input/Input";
+import Button from "./button/Button";
+import Card from "./Card/Card";
 
 interface TodoItem {
   id: number;
@@ -64,7 +64,11 @@ const addApi = async () => {
   const filteredList = searchQuery.trim() === ""
     ? list
     : list.filter((item) =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      
+       {const filteritem = item.title.toLowerCase().includes(searchQuery.toLowerCase())
+       console.log( item.title.toLowerCase().includes(searchQuery.toLowerCase()));
+        return filteritem
+      }
       );
 
   const toggleSelection = (id: number) => {
