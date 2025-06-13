@@ -1,7 +1,7 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 
-const inputDir = "build";
+const inputDir = "public/dist";
 const prefix = "opteamix-";
 
 const processFile = (filePath: string): void => {

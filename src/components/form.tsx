@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { deleteItem, getItems, postItem, updateItem } from "../services/todoService";
 import "./form.css";
 import Input from "./Input/Input";
+import {jsonFileService } from "../services/jsonFileService";
 import Button from "./button/Button";
 import Card from "./Card/Card";
 
@@ -10,34 +11,46 @@ interface TodoItem {
   title: string;
   compleated: boolean;
 }
-
-const getStoredList = (): TodoItem[] => {
-  const storedList = localStorage.getItem("todoList");
-  return storedList ? JSON.parse(storedList) : [];
+const getStoredList = async (): Promise<TodoItem[]> => {
+  return await jsonFileService.getTodoList();
 };
 
 
 const Form: React.FC = () => {
-  const [list, setList] = useState<TodoItem[]>(getStoredList);
-const [inputValue, setInputValue] = useState<string>("");
-const [searchQuery, setSearchQuery] = useState<string>("");
-
-
-const addApi = async () => {
-  try {
-    const newList = await getItems();
-
-    setList((prevList) => [...prevList, ...newList]);
-    localStorage.setItem("todoList", JSON.stringify([...list, ...newList])); 
-  } catch (error) {
-    console.error("Error fetching API data:", error);
-  }
-};
-
+  const [list, setList] = useState<TodoItem[]>([]); 
+  const [inputValue, setInputValue] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [num, setNum] = useState(0);
 
   useEffect(() => {
-    localStorage.setItem("todoList", JSON.stringify(list));
+    const fetchStoredList = async () => {
+      const storedList = await jsonFileService.getTodoList();
+      setList(storedList);
+    };
+
+
+    fetchStoredList();
+  }, []); 
+
+  const addApi = async () => {
+    try {
+      const newList: TodoItem[] = await getItems(num * 10); 
+
+      setList((prevList) => { 
+        const updated = [...prevList, ...newList];
+        jsonFileService.saveTodoList(updated);
+        return updated;
+      });
+      setNum((prevNum) => prevNum + 1); 
+    } catch (error) {
+      console.error("Error fetching API data:", error);
+    }
+  };
+
+  useEffect(() => {
+    jsonFileService.saveTodoList(list);
   }, [list]);
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -61,15 +74,13 @@ const addApi = async () => {
     setSearchQuery(event.target.value);
   };
 
-  const filteredList = searchQuery.trim() === ""
+  const filteredList = Array.isArray(list) && searchQuery.trim() === ""
     ? list
-    : list.filter((item) =>
-      
-       {const filteritem = item.title.toLowerCase().includes(searchQuery.toLowerCase())
-       console.log( item.title.toLowerCase().includes(searchQuery.toLowerCase()));
-        return filteritem
-      }
-      );
+    : list.filter((item) => {
+        const filteritem = item.title.toLowerCase().includes(searchQuery.toLowerCase());
+        console.log(item.title.toLowerCase().includes(searchQuery.toLowerCase()));
+        return filteritem;
+      });
 
   const toggleSelection = (id: number) => {
     setList((prevList) =>

@@ -6,14 +6,14 @@ interface TodoItem {
     compleated: boolean;
 }
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrl = "https://jsonplaceholder.typicode.com/todos";
 
 if (!apiUrl) {throw new Error("REACT_APP_API_URL does not exist")}
 
-export const getItems = async () => {
+export const getItems = async (start:number) => {
     const response = await axios.get<TodoItem[]>(apiUrl);
 
-    const newList = response.data.slice(0, 10).map((item) => ({
+    const newList = response.data.slice(start, start+10).map((item) => ({
         id: item.id,
         title: item.title,
         compleated: item.compleated,
@@ -39,3 +39,4 @@ export const updateItem = async (id: number, data: { title: string }) => {
         throw error;
     }
 };
+export type { TodoItem };

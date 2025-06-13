@@ -1,8 +1,28 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "strict": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node"
-  }
+  "module": "esnext",
+  "moduleResolution": "node",
+  "target": "esnext",
+  "strict": true,
+  "esModuleInterop": true,
+  "skipLibCheck": true,
+  "forceConsistentCasingInFileNames": true,
+  "allowSyntheticDefaultImports": true,
+  "jsx": "react-jsx",
+  "allowJs": true,
+  "noImplicitAny": true,      
+  "sourceMap": true,
+  "baseUrl": ".",
+  "outDir": "dist",
+  "resolveJsonModule": true
+},
+  "include": [
+    "src", 
+    "vite-env.d.ts", 
+    "posthtml.config.js", 
+    "setupTests.tsx"  ],
+  "exclude": [
+    "node_modules" 
+  ]
 }
+
